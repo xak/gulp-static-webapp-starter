@@ -1,10 +1,16 @@
 /*global -$ */
 'use strict';
-// generated on 2015-05-18 using generator-gulp-webapp 0.3.0
+var VERSION = '0.0.1';
+
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
+var minimist = require('minimist');
+
+var options = minimist(process.argv);
 var reload = browserSync.reload;
+var environment = options.environment || 'development';
+var config = require('./config.json');
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -40,7 +46,10 @@ gulp.task('html', ['styles'], function () {
     .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe($.if('*.html', $.ejs({
+        msg: "Hello!"
+    })))
+    .pipe($.if('*.html', (config.minify ? $.minifyHtml({conditionals: true, loose: true}) : $.util.noop())))
     .pipe(gulp.dest('dist'));
 });
 
@@ -119,6 +128,7 @@ gulp.task('wiredep', function () {
 
 gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+  console.log(environment + ' v' + VERSION + ' build is complete')
 });
 
 gulp.task('default', ['clean'], function () {
