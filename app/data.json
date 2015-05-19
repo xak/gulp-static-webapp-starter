@@ -1,0 +1,8 @@
+{
+	"site_title": "gulp-static-webapp-starter",
+	"page_title": "Pickled pop-up locavore meditation VHS",
+	"intro": "Drinking vinegar health goth ennui asymmetrical paleo cray. Master cleanse slow-carb next level heirloom.",
+	"navbar": [
+    { "label": "Home", "href": "/" }
+  ]
+}
