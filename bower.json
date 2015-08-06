@@ -1,5 +1,5 @@
 {
-  "name": "v18-vsa",
+  "name": "gulp-static-webapp-starter",
   "private": true,
   "dependencies": {
     "jquery": "~2.1.1",
